@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="23e43968-f8c5-4ce6-9c6f-d18fa32a2849" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/Home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/Profile/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Profile/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/ReadNews/readnews.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ReadNews/readnews.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/Search/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Search/search.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[676fc258]" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1pSnEnDq1Xj7WwmHmbkzNBC9ZO4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="dart.analysis.tool.window.force.activate" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="23e43968-f8c5-4ce6-9c6f-d18fa32a2849" name="Default Changelist" comment="" />
+      <created>1615185251424</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615185251424</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="233" y="36" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1615273291940">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="36" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.680@0.0.1280.680" timestamp="1615273291940" />
+    <state x="389" y="175" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1615356440381">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="389" y="175" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.680@0.0.1280.680" timestamp="1615356440381" />
+    <state x="100" y="100" width="532" height="480" key="AVDManager" timestamp="1615958645096">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="100" y="100" width="532" height="480" key="AVDManager/0.0.1280.680@0.0.1280.680" timestamp="1615958645096" />
+    <state width="1236" height="218" key="GridCell.Tab.0.bottom" timestamp="1616133431687">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1236" height="218" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1616133431687" />
+    <state width="1236" height="218" key="GridCell.Tab.0.center" timestamp="1616133431687">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1236" height="218" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1616133431687" />
+    <state width="1236" height="218" key="GridCell.Tab.0.left" timestamp="1616133431687">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1236" height="218" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1616133431687" />
+    <state width="1236" height="218" key="GridCell.Tab.0.right" timestamp="1616133431687">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1236" height="218" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1616133431687" />
+    <state x="221" y="84" key="IDE.errors.dialog" timestamp="1615357292580">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="221" y="84" key="IDE.errors.dialog/0.0.1280.680@0.0.1280.680" timestamp="1615357292580" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1615788192209">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1615788192209" />
+    <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1616007403704">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1616007403704" />
+    <state x="450" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615875496735">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="450" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1615875496735" />
+    <state x="0" y="0" width="587" height="680" key="find.popup" timestamp="1615529462200">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="0" width="587" height="680" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1615529462200" />
+    <state x="298" y="151" key="run.anything.popup" timestamp="1615787710158">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="298" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1615787710158" />
+  </component>
+</project>
