@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,11 +5,10 @@ import '../../constants.dart';
 import 'dart:ui';
 import '../ReadNews/readnews.dart';
 import '../../data.dart';
-import 'dart:async';
 
 class App extends StatefulWidget {
   static const id = 'app';
-  String newsType = '';
+  final String newsType = '';
   @override
   _AppState createState() => _AppState();
 }
@@ -166,7 +163,7 @@ class _AppState extends State<App> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * .55,
+                  height: 250.0,
                   child: FutureBuilder(
                     builder: (context, snapshot) {
                       return snapshot.data == null

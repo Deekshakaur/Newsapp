@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:newsapp/Screens/Profile/profile.dart';
 import 'package:newsapp/Screens/ReadNews/readnews.dart';
@@ -7,7 +5,6 @@ import 'package:newsapp/Screens/Search/search.dart';
 import 'package:newsapp/data.dart';
 import 'package:provider/provider.dart';
 import 'Screens/Home/home.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());

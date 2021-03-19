@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:newsapp/Screens/Home/home.dart';
+import 'package:intl/intl.dart';
 import 'package:newsapp/constants.dart';
 import 'package:provider/provider.dart';
 import '../../Screens/ReadNews/readnews.dart';
@@ -9,27 +9,34 @@ import '../../data.dart';
 
 class Search extends StatefulWidget {
   static const id = 'search';
-  String newsType = '';
+  final String newsType = '';
   @override
   _SearchState createState() => _SearchState();
 }
 
 class _SearchState extends State<Search> {
   Widget newsBuilder(List<Article> article) {
-    return ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: 5,
-        shrinkWrap: true,
-        itemBuilder: (context, position) {
-          return BreakingNewsBuilder(
-            author: article[position].author,
-            title: article[position].title,
-            publishedAt: article[position].publishedAt,
-            source: article[position].source,
-            urlToImage: article[position].urlToImage ??
-                'https://s3.amazonaws.com/speedsport-news/speedsport-news/wp-content/uploads/2018/07/01082232/image-not-found.png',
-          );
-        });
+    return Container(
+      height: MediaQuery.of(context).size.height * .50,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: article.length,
+          shrinkWrap: true,
+          itemBuilder: (context, position) {
+            return BreakingNewsBuilder(
+              author: article[position].author,
+              title: article[position].title,
+              content: article[position].content,
+              description: article[position].description,
+              url: article[position].url,
+              publishedAt: article[position].publishedAt,
+              source: article[position].source,
+              urlToImage: article[position].urlToImage ??
+                  'https://s3.amazonaws.com/speedsport-news/speedsport-news/wp-content/uploads/2018/07/01082232/image-not-found.png',
+            );
+          }),
+    );
   }
 
   @override
@@ -43,9 +50,9 @@ class _SearchState extends State<Search> {
                 margin: EdgeInsets.symmetric(horizontal: kPadding * 1.5),
                 child: Column(
                   children: [
-                    // SizedBox(
-                    //   height: kPadding * 4,
-                    // ),
+                    SizedBox(
+                      height: kPadding * 4,
+                    ),
                     Text(
                       'Discover',
                       style: TextStyle(
@@ -60,7 +67,7 @@ class _SearchState extends State<Search> {
                           color: Colors.grey),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: kPadding),
+                      // margin: EdgeInsets.symmetric(vertical: kPadding),
                       padding: EdgeInsets.symmetric(vertical: kPadding),
                       child: TextField(
                         cursorColor: Colors.black,
@@ -84,7 +91,7 @@ class _SearchState extends State<Search> {
                       ),
                     ),
                     DefaultTabController(
-                      length: 2,
+                      length: 4,
                       initialIndex: 0,
                       child: Column(
                         children: [
@@ -95,10 +102,16 @@ class _SearchState extends State<Search> {
                               indicatorColor: Colors.black,
                               tabs: [
                                 Tab(
-                                  text: 'Health',
+                                  text: 'General',
                                 ),
                                 Tab(
-                                  text: 'Lifestyle',
+                                  text: 'Sports',
+                                ),
+                                Tab(
+                                  text: 'Business',
+                                ),
+                                Tab(
+                                  text: 'Entertainment',
                                 )
                               ],
                               labelStyle: TextStyle(
@@ -109,41 +122,73 @@ class _SearchState extends State<Search> {
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height * .55,
-                            padding: EdgeInsets.symmetric(vertical: kPadding),
                             child: TabBarView(
                               children: [
-                                Container(
-                                  child: FutureBuilder(
-                                    builder: (context, snapshot) {
-                                      return snapshot.data == null
-                                          ? Center(
-                                              child: CircularProgressIndicator
-                                                  .adaptive(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.black),
-                                            ))
-                                          : newsBuilder(snapshot.data);
-                                    },
-                                    future: data.getData(widget.newsType),
-                                  ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: kPadding),
+                                      child: FutureBuilder(
+                                        builder: (context, snapshot) {
+                                          return snapshot.data == null
+                                              ? Center(
+                                                  child:
+                                                      CircularProgressIndicator
+                                                          .adaptive(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(Colors.black),
+                                                ))
+                                              : newsBuilder(snapshot.data);
+                                        },
+                                        future: data.getData(widget.newsType),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Container(
-                                  child: FutureBuilder(
-                                    builder: (context, snapshot) {
-                                      return snapshot.data == null
-                                          ? Center(
-                                              child: CircularProgressIndicator
-                                                  .adaptive(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.black),
-                                            ))
-                                          : newsBuilder(snapshot.data);
-                                    },
-                                    future: data.getData(widget.newsType),
-                                  ),
+                                Column(
+                                  children: [
+                                    FutureBuilder(
+                                      builder: (context, snapshot) {
+                                        return snapshot.data == null
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : newsBuilder(snapshot.data);
+                                      },
+                                      future: data.getData(widget.newsType),
+                                    )
+                                  ],
                                 ),
+                                Column(
+                                  children: [
+                                    FutureBuilder(
+                                      builder: (context, snapshot) {
+                                        return snapshot.data == null
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : newsBuilder(snapshot.data);
+                                      },
+                                      future: data.getData(widget.newsType),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    FutureBuilder(
+                                      builder: (context, snapshot) {
+                                        return snapshot.data == null
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : newsBuilder(snapshot.data);
+                                      },
+                                      future: data.getData(widget.newsType),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
                           )
@@ -182,9 +227,9 @@ class BreakingNewsBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(onTap: () {
-      {
-        Navigator.pop(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ReadNews(
@@ -195,9 +240,8 @@ class BreakingNewsBuilder extends StatelessWidget {
                       title: this.title,
                       url: this.url,
                     )));
-      }
-      Container(
-        height: MediaQuery.of(context).size.height * .55,
+      },
+      child: Container(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -226,39 +270,25 @@ class BreakingNewsBuilder extends StatelessWidget {
                   ),
                   SizedBox(height: kPadding / 2.5),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    textBaseline: TextBaseline.alphabetic,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.access_time_outlined,
-                            size: 14.0,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            author,
-                            style: TextStyle(
-                                height: 1.5,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
+                      Icon(
+                        Icons.access_time_rounded,
+                        size: 18.0,
+                        color: Colors.grey,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.remove_red_eye_outlined,
-                            size: 14.0,
+                      SizedBox(width: kPadding / 2),
+                      Text(
+                        DateFormat("yMMMd")
+                            .format(DateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                                .parse(publishedAt))
+                            .toString(),
+                        style: TextStyle(
+                            height: 1.5,
                             color: Colors.grey,
-                          ),
-                          Text(
-                            publishedAt,
-                            style: TextStyle(
-                                height: 1.5,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   )
@@ -267,7 +297,7 @@ class BreakingNewsBuilder extends StatelessWidget {
             ),
           ],
         ),
-      );
-    });
+      ),
+    );
   }
 }
