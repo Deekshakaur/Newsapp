@@ -16,13 +16,13 @@ class ReadNews extends StatefulWidget {
   final String author;
   final String content;
   ReadNews(
-      {this.content,
-      this.imageUrl,
-      this.name,
-      this.title,
-      this.author,
-      this.url,
-      this.desc});
+      {@required this.content,
+      @required this.imageUrl,
+      @required this.name,
+      @required this.title,
+      @required this.author,
+      @required this.url,
+      @required this.desc});
   @override
   _ReadNewsState createState() => _ReadNewsState();
 }
@@ -39,7 +39,10 @@ class _ReadNewsState extends State<ReadNews> {
             height: MediaQuery.of(context).size.height * .55,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage('${widget.imageUrl}'), fit: BoxFit.cover),
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(.4), BlendMode.darken),
+                  image: NetworkImage('${widget.imageUrl}'),
+                  fit: BoxFit.cover),
             ),
             padding: EdgeInsets.fromLTRB(
                 kPadding * 1.5, kPadding * 2, kPadding * 1.5, kPadding * 4),
@@ -98,7 +101,7 @@ class _ReadNewsState extends State<ReadNews> {
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
-                              color: Colors.grey,
+                              color: Colors.white,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),

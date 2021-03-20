@@ -42,7 +42,11 @@ class _AppState extends State<App> {
     return UpperContainerBuilder(
         source: '${article[19].source.name}',
         title: '${article[19].title}',
-        urlToImage: '${article[19].urlToImage}');
+        urlToImage: '${article[19].urlToImage}',
+        content: '${article[19].content}',
+        desc: '${article[19].description}',
+        url: '${article[19].url}',
+        author: '${article[19].author}');
   }
 
   @override
@@ -115,37 +119,38 @@ class BreakingNewsBuilder extends StatelessWidget {
   final String publishedAt;
   final String content;
   BreakingNewsBuilder(
-      {this.urlToImage,
-      this.description,
-      this.source,
-      this.content,
-      this.author,
-      this.url,
-      this.title,
-      this.publishedAt});
+      {@required this.urlToImage,
+      @required this.description,
+      @required this.source,
+      @required this.content,
+      @required this.author,
+      @required this.url,
+      @required this.title,
+      @required this.publishedAt});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: kPadding / 2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReadNews(
-                            content: this.content,
-                            author: this.author,
-                            imageUrl: this.urlToImage,
-                            desc: this.description,
-                            title: this.title,
-                            url: this.url,
-                          )));
-            },
-            child: Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ReadNews(
+                      content: this.content,
+                      author: this.author,
+                      imageUrl: this.urlToImage,
+                      desc: this.description,
+                      title: this.title,
+                      name: this.source.name,
+                      url: this.url,
+                    )));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: kPadding / 2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
               margin: EdgeInsets.only(bottom: kPadding * 0.7),
               decoration: BoxDecoration(
                   image: DecorationImage(
@@ -156,12 +161,7 @@ class BreakingNewsBuilder extends StatelessWidget {
               width: 200.0,
               height: 125.0,
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, ReadNews.id);
-            },
-            child: Container(
+            Container(
                 width: 200.0,
                 child: Text(
                   '$title',
@@ -170,24 +170,25 @@ class BreakingNewsBuilder extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 )),
-          ),
-          Text(
-            DateFormat("yMMMd")
-                .format(DateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(publishedAt))
-                .toString(),
-            style: TextStyle(
-                height: 1.5,
-                color: Color(0xff666666),
-                fontWeight: FontWeight.w500),
-          ),
-          Text(
-            '$author',
-            style: TextStyle(
-                height: 1.5,
-                color: Color(0xff666666),
-                fontWeight: FontWeight.w500),
-          ),
-        ],
+            Text(
+              DateFormat("yMMMd")
+                  .format(
+                      DateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(publishedAt))
+                  .toString(),
+              style: TextStyle(
+                  height: 1.5,
+                  color: Color(0xff666666),
+                  fontWeight: FontWeight.w500),
+            ),
+            Text(
+              '$author',
+              style: TextStyle(
+                  height: 1.5,
+                  color: Color(0xff666666),
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -197,8 +198,18 @@ class UpperContainerBuilder extends StatefulWidget {
   final String urlToImage;
   final String title;
   final String source;
+  final String content;
+  final String url;
+  final String desc;
+  final String author;
   UpperContainerBuilder(
-      {@required this.source, @required this.title, @required this.urlToImage});
+      {@required this.author,
+      @required this.source,
+      @required this.title,
+      @required this.urlToImage,
+      @required this.content,
+      @required this.desc,
+      @required this.url});
   @override
   _UpperContainerBuilderState createState() => _UpperContainerBuilderState();
 }
@@ -206,87 +217,103 @@ class UpperContainerBuilder extends StatefulWidget {
 class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(.4), BlendMode.darken),
-            image: NetworkImage(
-              '${widget.urlToImage}',
-            ),
-            fit: BoxFit.cover),
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.zero,
-            topRight: Radius.zero,
-            bottomLeft: Radius.circular(kRoundedcornersradius),
-            bottomRight: Radius.circular(kRoundedcornersradius)),
-      ),
-      padding: EdgeInsets.symmetric(
-          horizontal: kPadding * 1.5, vertical: kPadding * 2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRect(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: kPadding / 2, horizontal: kPadding),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(.3),
-                      borderRadius:
-                          BorderRadius.circular(kRoundedcornersradius),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10.5, sigmaY: 10.6),
-                      child: Text(
-                        "${widget.source}",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ReadNews(
+                      name: widget.source,
+                      title: widget.title,
+                      content: widget.content,
+                      url: widget.url,
+                      desc: widget.desc,
+                      author: widget.author,
+                      imageUrl: widget.urlToImage,
+                    )));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(.4), BlendMode.darken),
+              image: NetworkImage(
+                '${widget.urlToImage}',
+              ),
+              fit: BoxFit.cover),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.zero,
+              topRight: Radius.zero,
+              bottomLeft: Radius.circular(kRoundedcornersradius),
+              bottomRight: Radius.circular(kRoundedcornersradius)),
+        ),
+        padding: EdgeInsets.symmetric(
+            horizontal: kPadding * 1.5, vertical: kPadding * 2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRect(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: kPadding / 2, horizontal: kPadding),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(.3),
+                        borderRadius:
+                            BorderRadius.circular(kRoundedcornersradius),
+                      ),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.5, sigmaY: 10.6),
+                        child: Text(
+                          "${widget.source}",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  child: Text(
-                    "${widget.title}",
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  margin: EdgeInsets.symmetric(vertical: kPadding),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Learn More',
+                  Container(
+                    child: Text(
+                      "${widget.title}",
                       style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    Icon(
-                      Icons.east_rounded,
-                      color: Colors.white,
-                    )
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
+                    margin: EdgeInsets.symmetric(vertical: kPadding),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Learn More',
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        Icons.east_rounded,
+                        color: Colors.white,
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+        height: MediaQuery.of(context).size.height * 0.45,
       ),
-      height: MediaQuery.of(context).size.height * 0.45,
     );
   }
 }

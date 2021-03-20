@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/Screens/Profile/profile.dart';
-import 'package:newsapp/Screens/ReadNews/readnews.dart';
 import 'package:newsapp/Screens/Search/search.dart';
 import 'package:newsapp/data.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
           App.id: (context) => App(),
           Search.id: (context) => Search(),
           Profile.id: (context) => Profile(),
-          ReadNews.id: (context) => ReadNews()
         },
         debugShowCheckedModeBanner: false,
       ),
