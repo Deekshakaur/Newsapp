@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:newsapp/constants.dart';
 import 'package:provider/provider.dart';
 import '../../Screens/ReadNews/readnews.dart';
+import '../../constants.dart';
+
 import '../../data.dart';
 
 class Search extends StatefulWidget {
@@ -17,7 +19,8 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   Widget newsBuilder(List<Article> article) {
     return Container(
-      height: MediaQuery.of(context).size.height * .50,
+      padding: EdgeInsets.only(top: kPadding),
+      height: MediaQuery.of(context).size.height * .55,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.vertical,
@@ -120,31 +123,27 @@ class _SearchState extends State<Search> {
                             ),
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height * .55,
+                            height: MediaQuery.of(context).size.height * .55715,
                             child: TabBarView(
                               children: [
                                 Column(
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: kPadding),
-                                      child: FutureBuilder(
-                                        builder: (context, snapshot) {
-                                          return snapshot.data == null
-                                              ? Center(
-                                                  child:
-                                                      CircularProgressIndicator
-                                                          .adaptive(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(Colors.black),
-                                                ))
-                                              : newsBuilder(snapshot.data);
-                                        },
-                                        future: data.getData(widget.newsType),
-                                      ),
+                                    FutureBuilder(
+                                      builder: (context, snapshot) {
+                                        return snapshot.data == null
+                                            ? Center(
+                                                child: CircularProgressIndicator
+                                                    .adaptive(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.black),
+                                              ))
+                                            : newsBuilder(snapshot.data);
+                                      },
+                                      future: data.getData(widget.newsType),
                                     ),
                                   ],
+                                  mainAxisSize: MainAxisSize.min,
                                 ),
                                 Column(
                                   children: [
@@ -152,8 +151,12 @@ class _SearchState extends State<Search> {
                                       builder: (context, snapshot) {
                                         return snapshot.data == null
                                             ? Center(
-                                                child:
-                                                    CircularProgressIndicator())
+                                                child: CircularProgressIndicator
+                                                    .adaptive(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.black),
+                                              ))
                                             : newsBuilder(snapshot.data);
                                       },
                                       future: data.getData(widget.newsType),
@@ -166,8 +169,12 @@ class _SearchState extends State<Search> {
                                       builder: (context, snapshot) {
                                         return snapshot.data == null
                                             ? Center(
-                                                child:
-                                                    CircularProgressIndicator())
+                                                child: CircularProgressIndicator
+                                                    .adaptive(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.black),
+                                              ))
                                             : newsBuilder(snapshot.data);
                                       },
                                       future: data.getData(widget.newsType),
@@ -180,8 +187,12 @@ class _SearchState extends State<Search> {
                                       builder: (context, snapshot) {
                                         return snapshot.data == null
                                             ? Center(
-                                                child:
-                                                    CircularProgressIndicator())
+                                                child: CircularProgressIndicator
+                                                    .adaptive(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.black),
+                                              ))
                                             : newsBuilder(snapshot.data);
                                       },
                                       future: data.getData(widget.newsType),
@@ -238,9 +249,12 @@ class BreakingNewsBuilder extends StatelessWidget {
                       desc: this.description,
                       title: this.title,
                       url: this.url,
+                      name: this.author ?? this.source.name,
                     )));
       },
       child: Container(
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -256,6 +270,7 @@ class BreakingNewsBuilder extends StatelessWidget {
               height: kPadding * 5,
             ),
             Expanded(
+              flex: 2,
               child: Column(
                 children: [
                   Text(

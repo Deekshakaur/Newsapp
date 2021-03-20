@@ -5,6 +5,7 @@ import '../../constants.dart';
 import 'dart:ui';
 import '../ReadNews/readnews.dart';
 import '../../data.dart';
+import 'package:intl/intl.dart';
 
 class App extends StatefulWidget {
   static const id = 'app';
@@ -16,7 +17,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   Widget newsBuilder(List<Article> article) {
     return Container(
-      height: MediaQuery.of(context).size.height * .45,
+      height: MediaQuery.of(context).size.height * .33,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 19,
@@ -24,7 +25,7 @@ class _AppState extends State<App> {
           itemBuilder: (context, position) {
             return BreakingNewsBuilder(
               url: article[position].url,
-              author: article[position].author,
+              author: article[position].author ?? article[position].source.name,
               title: article[position].title,
               content: article[position].content,
               description: article[position].description,
@@ -39,7 +40,7 @@ class _AppState extends State<App> {
 
   Widget buildContainer(List<Article> article) {
     return UpperContainerBuilder(
-        source: '${article[19].source}',
+        source: '${article[19].source.name}',
         title: '${article[19].title}',
         urlToImage: '${article[19].urlToImage}');
   }
@@ -57,7 +58,10 @@ class _AppState extends State<App> {
                       future: data.getData(widget.newsType),
                       builder: (context, snapshot) {
                         return snapshot.data == null
-                            ? CircularProgressIndicator()
+                            ? CircularProgressIndicator.adaptive(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.black),
+                              )
                             : buildContainer(snapshot.data);
                       }),
                   Container(
@@ -168,7 +172,9 @@ class BreakingNewsBuilder extends StatelessWidget {
                 )),
           ),
           Text(
-            '$publishedAt',
+            DateFormat("yMMMd")
+                .format(DateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(publishedAt))
+                .toString(),
             style: TextStyle(
                 height: 1.5,
                 color: Color(0xff666666),
@@ -203,6 +209,8 @@ class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(.4), BlendMode.darken),
             image: NetworkImage(
               '${widget.urlToImage}',
             ),
@@ -239,7 +247,7 @@ class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -251,7 +259,7 @@ class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -264,7 +272,7 @@ class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
                       'Learn More',
                       style: TextStyle(
                           fontSize: 16.0,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     Icon(
@@ -278,7 +286,7 @@ class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
           )
         ],
       ),
-      height: MediaQuery.of(context).size.height * 0.40,
+      height: MediaQuery.of(context).size.height * 0.45,
     );
   }
 }

@@ -12,7 +12,7 @@ class Article extends ChangeNotifier {
   String urlToImage;
   String publishedAt;
   String content;
-
+  String apiKey = '95d2fabdfb224d69816a97df919591d3';
   Article(
       {this.source,
       this.author,
@@ -40,101 +40,15 @@ class Article extends ChangeNotifier {
     var res = await http.get(
       Uri.https('newsapi.org', 'v2/top-headlines', {
         'country': 'in',
-        'apiKey': '95d2fabdfb224d69816a97df919591d3',
+        'apiKey': apiKey,
       }),
     );
-    print(res.body);
     if (res.statusCode == 200) {
       var data = json.decode(res.body);
       var rest = data["articles"] as List;
-      print(rest);
       list = rest.map<Article>((json) => Article.fromJson(json)).toList();
     }
 
-    return list;
-  }
-
-  Future<List<Article>> getGeneralData(String newsType) async {
-    List<Article> list;
-
-    var res = await http.get(
-      Uri.https('newsapi.org', 'v2/sources', {
-        'category': 'general',
-        'country': 'in',
-        'apiKey': '95d2fabdfb224d69816a97df919591d3',
-      }),
-    );
-    print(res.body);
-    if (res.statusCode == 200) {
-      var data = json.decode(res.body);
-      var rest = data["articles"] as List;
-      print(rest);
-      list = rest.map<Article>((json) => Article.fromJson(json)).toList();
-    }
-    print("List Size: ${list.length}");
-    return list;
-  }
-
-  Future<List<Article>> getSportsData(String newsType) async {
-    List<Article> list;
-
-    var res = await http.get(
-      Uri.https('newsapi.org', 'v2/sources', {
-        'category': 'sports',
-        'country': 'in',
-        'apiKey': '95d2fabdfb224d69816a97df919591d3',
-      }),
-    );
-    print(res.body);
-    if (res.statusCode == 200) {
-      var data = json.decode(res.body);
-      var rest = data["articles"] as List;
-      print(rest);
-      list = rest.map<Article>((json) => Article.fromJson(json)).toList();
-    }
-    print("List Size: ${list.length}");
-    return list;
-  }
-
-  Future<List<Article>> getBusinessData(String newsType) async {
-    List<Article> list;
-
-    var res = await http.get(
-      Uri.https('newsapi.org', 'v2/sources', {
-        'category': 'business',
-        'country': 'in',
-        'apiKey': '95d2fabdfb224d69816a97df919591d3',
-      }),
-    );
-    print(res.body);
-    if (res.statusCode == 200) {
-      var data = json.decode(res.body);
-      var rest = data["articles"] as List;
-      print(rest);
-      list = rest.map<Article>((json) => Article.fromJson(json)).toList();
-    }
-    print("List Size: ${list.length}");
-    return list;
-  }
-
-  Future<List<Article>> getEntertainmentData(String newsType) async {
-    List<Article> list;
-
-    var res = await http.get(
-      Uri.https('newsapi.org', 'v2/sources', {
-        'category': 'entertainment',
-        'country': 'in',
-        'apiKey': '95d2fabdfb224d69816a97df919591d3',
-      }),
-    );
-    print(res.body);
-    if (res.statusCode == 200) {
-      var data = json.decode(res.body);
-      var rest = data["articles"] as List;
-      print(rest);
-      list = rest.map<Article>((json) => Article.fromJson(json)).toList();
-    }
-    print("List Size: ${list.length}");
     return list;
   }
 }
