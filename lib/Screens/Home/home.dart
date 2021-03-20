@@ -37,134 +37,49 @@ class _AppState extends State<App> {
     );
   }
 
+  Widget buildContainer(List<Article> article) {
+    return UpperContainerBuilder(
+        source: '${article[19].source}',
+        title: '${article[19].title}',
+        urlToImage: '${article[19].urlToImage}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Article>(
       builder: (context, data, child) {
         return SafeArea(
           child: Scaffold(
-            body: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ReadNews(
-                                  content: data.content,
-                                  author: data.author,
-                                  imageUrl: data.urlToImage,
-                                  desc: data.description,
-                                  title: data.title,
-                                  url: data.url,
-                                )));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            '',
-                          ),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.zero,
-                          topRight: Radius.zero,
-                          bottomLeft: Radius.circular(kRoundedcornersradius),
-                          bottomRight: Radius.circular(kRoundedcornersradius)),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: kPadding * 1.5, vertical: kPadding * 2),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
+            body: Container(
+              child: Column(
+                children: [
+                  FutureBuilder(
+                      future: data.getData(widget.newsType),
+                      builder: (context, snapshot) {
+                        return snapshot.data == null
+                            ? CircularProgressIndicator()
+                            : buildContainer(snapshot.data);
+                      }),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(kPadding * 1.5, kPadding * 2,
+                        kPadding * 1.5, kPadding * 1.25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRect(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: kPadding / 2,
-                                      horizontal: kPadding),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(.3),
-                                    borderRadius: BorderRadius.circular(
-                                        kRoundedcornersradius),
-                                  ),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 10.5, sigmaY: 10.6),
-                                    child: Text(
-                                      ('kfhhasj'),
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  "${data.title}",
-                                  style: TextStyle(
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                margin:
-                                    EdgeInsets.symmetric(vertical: kPadding),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Learn More',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Icon(
-                                    Icons.east_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                        Text(
+                          'Breaking News',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'More',
+                          style: TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
-                    height: MediaQuery.of(context).size.height * 0.40,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(kPadding * 1.5, kPadding * 2,
-                      kPadding * 1.5, kPadding * 1.25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Breaking News',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'More',
-                        style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 250.0,
-                  child: FutureBuilder(
+                  FutureBuilder(
                     builder: (context, snapshot) {
                       return snapshot.data == null
                           ? Center(
@@ -175,9 +90,9 @@ class _AppState extends State<App> {
                           : newsBuilder(snapshot.data);
                     },
                     future: data.getData(widget.newsType),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         );
@@ -268,6 +183,102 @@ class BreakingNewsBuilder extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class UpperContainerBuilder extends StatefulWidget {
+  final String urlToImage;
+  final String title;
+  final String source;
+  UpperContainerBuilder(
+      {@required this.source, @required this.title, @required this.urlToImage});
+  @override
+  _UpperContainerBuilderState createState() => _UpperContainerBuilderState();
+}
+
+class _UpperContainerBuilderState extends State<UpperContainerBuilder> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: NetworkImage(
+              '${widget.urlToImage}',
+            ),
+            fit: BoxFit.cover),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.zero,
+            topRight: Radius.zero,
+            bottomLeft: Radius.circular(kRoundedcornersradius),
+            bottomRight: Radius.circular(kRoundedcornersradius)),
+      ),
+      padding: EdgeInsets.symmetric(
+          horizontal: kPadding * 1.5, vertical: kPadding * 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRect(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: kPadding / 2, horizontal: kPadding),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(.3),
+                      borderRadius:
+                          BorderRadius.circular(kRoundedcornersradius),
+                    ),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.5, sigmaY: 10.6),
+                      child: Text(
+                        "${widget.source}",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    "${widget.title}",
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: kPadding),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Learn More',
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Icon(
+                      Icons.east_rounded,
+                      color: Colors.white,
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+      height: MediaQuery.of(context).size.height * 0.40,
     );
   }
 }

@@ -50,7 +50,7 @@ class Article extends ChangeNotifier {
       print(rest);
       list = rest.map<Article>((json) => Article.fromJson(json)).toList();
     }
-    print("List Size: ${list.length}");
+
     return list;
   }
 

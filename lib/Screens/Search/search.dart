@@ -67,7 +67,6 @@ class _SearchState extends State<Search> {
                           color: Colors.grey),
                     ),
                     Container(
-                      // margin: EdgeInsets.symmetric(vertical: kPadding),
                       padding: EdgeInsets.symmetric(vertical: kPadding),
                       child: TextField(
                         cursorColor: Colors.black,
